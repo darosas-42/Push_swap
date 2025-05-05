@@ -6,7 +6,8 @@ LIB = ar rcs
 
 FLAGS = -Wall -Werror -Wextra
 
-FILES = 
+FILES = push_swap.c\
+		utils.c
 
 OBJECTS = $(FILES:.c=.o)
 
