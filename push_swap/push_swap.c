@@ -59,10 +59,8 @@ static int	valid_args(char **argv, t_stacks *stacks)
 
 static void	getting_args(char **argv, t_stacks *stacks)
 {
-	char	**matrix;
 	int		i;
 	int		j;
-	int		x;
 
 	i = 0;
 	while (argv[++i])
@@ -72,16 +70,18 @@ static void	getting_args(char **argv, t_stacks *stacks)
 		{
 			if (argv[i][j] == ' ')
 			{
-				matrix = ft_split(argv[i], ' ');
-				if (!matrix)
-					error_ps(stacks);
-				x = -1;
-				while (matrix[++x])
-					stacks->a[stacks->index++] = ft_atoi(matrix[x]);
+				splitting_args(argv[i], stacks);
+				break ;
 			}
 		}
+		if (argv[i][j] == ' ')
+			continue ;
 		stacks->a[stacks->index++] = ft_atoi(argv[i]);
 	}
+	i = -1;
+	while (stacks->a[++i])
+		stacks->good_a[i] = stacks->a[i];
+	good_stack(stacks);
 }
 
 int	main(int argc, char **argv)

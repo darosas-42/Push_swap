@@ -26,25 +26,7 @@ void	initialize_args(t_stacks *stacks)
 	stacks->index = 0;
 }
 
-/* void	splitting_args(char *str, t_stacks *stacks)
-{
-	char	**matrix;
-	int		i;
-	int		j;
-
-	matrix = ft_split(str, ' ');
-	if (!matrix)
-		error_ps(stacks);
-	i = 0;
-	while (matrix[i])
-	{
-		stacks->a[stacks->index] = ft_atoi(matrix[i]);
-		stacks->index++;
-		i++;
-	}
-} */
-
-void	perfect_ps(t_stacks *stacks)
+/*void	perfect_ps(t_stacks *stacks)
 {
 	if (stacks)
 	{
@@ -58,4 +40,49 @@ void	perfect_ps(t_stacks *stacks)
 	}
 	write(2, "Perfect\n", 6);
 	exit(EXIT_SUCCESS);
+} */
+
+void	splitting_args(char *str, t_stacks *stacks)
+{
+	char	**matrix;
+	int		i;
+	int		x;
+
+	matrix = ft_split(str, ' ');
+	if (!matrix)
+		error_ps(stacks);
+	x = 0;
+	while (matrix[x])
+		stacks->a[stacks->index++] = ft_atoi(matrix[x++]);
+	i = -1;
+	while (matrix[++i])
+		free(matrix[i]);
+	free(matrix);
+}
+
+void	good_stack(t_stacks *stacks)
+{
+	int	i;
+	int	j;
+	int	swap;
+
+	i = 0;
+	while (stacks->good_a[i + 1])
+	{
+		j = i + 1;
+		while (stacks->good_a[j])
+		{
+			if (stacks->good_a[i] == stacks->good_a[j])
+				error_ps(stacks);
+			if (stacks->good_a[i] > stacks->good_a[j])
+			{
+				swap = stacks->good_a[i];
+				stacks->good_a[i] = stacks->good_a[j];
+				stacks->good_a[j] = swap;
+				i = 0;
+			}
+			j++;
+		}
+		i++;
+	}
 }
