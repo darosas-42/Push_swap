@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:28:35 by darosas-          #+#    #+#             */
-/*   Updated: 2025/04/30 19:28:38 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:48:22 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,29 @@ void	swap(char *msg, t_stacks *stacks)
 
 void	push(char *msg, t_stacks *stacks)
 {
-	int	tmp;
 	int	i;
 
-	i = 0;
-	if (msg[1] == 'a')
-	{
-		while (stacks->a[i])
-			i++;
-		while (i > -1)
-		{
-			
-		}
-	}
 	if (msg[1] == 'b')
 	{
-		while (stacks->b[i])
-			i++;
+		i = ++stacks->b_size;
+		while (--i > 0)
+			stacks->b[i] = stacks->b[i - 1];
+		stacks->b[0] = stacks->a[0];
+		i = -1;
+		while (++i < --stacks->a_size)
+			stacks->a[i] = stacks->a[i + 1];
+		write(1, "pb\n", 3);
+	}
+	else
+	{
+		i = ++stacks->a_size;
+		while (--i > 0)
+			stacks->a[i] = stacks->a[i - 1];
+		stacks->a[0] = stacks->b[0];
+		i = -1;
+		while (++i < --stacks->b_size)
+			stacks->b[i] = stacks->b[i + 1];
+		write(1, "pa\n", 3);
 	}
 }
 

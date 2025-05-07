@@ -1,4 +1,4 @@
-NAME = push_swap.a
+NAME = libftprintf.a
 
 CC = cc
 
@@ -6,21 +6,26 @@ LIB = ar rcs
 
 FLAGS = -Wall -Werror -Wextra
 
-FILES = push_swap.c\
-		utils.c
+FILES = ft_printf.c\
+	ft_putchar.c\
+	ft_putnbr.c\
+	ft_putstr.c\
+	ft_unsnb.c\
+	ft_address.c\
+	ft_hexadec.c\
 
 OBJECTS = $(FILES:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(LIB) $(FLAGS) $(OBJECTS)
+	$(LIB) $(NAME) $(OBJECTS)
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(OBJ_BONUS)
+	rm -f $(OBJECTS)
 
 fclean: clean
 	rm -f $(NAME)

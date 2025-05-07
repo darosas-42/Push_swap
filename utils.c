@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:47:57 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/05 18:25:46 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:28:42 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	initialize_args(t_stacks *stacks)
 	if (!stacks->good_a)
 		error_ps(stacks);
 	stacks->index = 0;
+	stacks->b_size = 0;
 }
 
 /*void	perfect_ps(t_stacks *stacks)
