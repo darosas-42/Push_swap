@@ -25,10 +25,12 @@ $(NAME): $(OBJECTS)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS)
+	@rm -f $(OBJECTS)
+	@echo "clean done!"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "clean done!"
 
 re: fclean all
 
