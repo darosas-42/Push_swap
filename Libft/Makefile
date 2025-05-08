@@ -4,9 +4,13 @@ CC = cc
 
 LIB = ar rcs
 
-FLAGS = -Werror -Wall -Wextra
+FLAGS = -Werror -Wall -Wextra // includes gnl?
+
+PRINTF_PATH = Printf
 
 OBJS_DIR = objs
+
+GNL_PATH = Get_next_line
 
 FILES = ft_isalpha.c\
 	ft_isdigit.c\
@@ -42,6 +46,10 @@ FILES = ft_isalpha.c\
 	ft_putstr_fd.c\
 	ft_putendl_fd.c\
 	ft_putnbr_fd.c\
+	$(GNL_PATH)/get_next_line.c\
+	$(GNL_PATH)/get_next_line_bonus.c\
+	$(GNL_PATH)/get_next_line_utils.c\
+	$(GNL_PATH)/get_next_line_utils_bonus.c\
 
 BONUS = ft_lstnew_bonus.c\
 	ft_lstadd_front_bonus.c\
@@ -56,7 +64,10 @@ BONUS = ft_lstnew_bonus.c\
 OBJECTS = $(FILES:%.c=$(OBJS_DIR)/%.o)
 OBJ_BONUS = $(BONUS:%.c=$(OBJS_DIR)/%.o)
 
-all: $(NAME)
+all: printf $(NAME)
+
+printf:
+	@if [ ! -f "$(PRINTF_PATH)/libftprintf.a" ]; then make -s -C $(PRINTF_PATH)
 
 $(NAME): $(OBJECTS)
 	$(LIB) $(NAME) $(OBJECTS)
@@ -71,11 +82,15 @@ bonus: $(OBJECTS) $(OBJ_BONUS)
 	$(LIB) $(NAME) $(OBJECTS) $(OBJ_BONUS)
 
 clean:
-	rm -rf $(OBJS_DIR)
+	@rm -rf $(OBJS_DIR)
+	@echo "libft clean done!"
+	@make clean -s -C $(PRINTF_PATH)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "libft fclean done!"
+	@make fclean -s -C $(PRINTF_PATH)
 
 re: fclean all
 
-.PHONY: re all clean fclean bonus
+.PHONY: re all clean fclean bonus printf
