@@ -6,6 +6,8 @@ LIB = ar rcs
 
 FLAGS = -Wall -Werror -Wextra
 
+OBJS_DIR = objs
+
 FILES = ft_printf.c\
 	ft_putchar.c\
 	ft_putnbr.c\
@@ -14,15 +16,18 @@ FILES = ft_printf.c\
 	ft_address.c\
 	ft_hexadec.c\
 
-OBJECTS = $(FILES:.c=.o)
+OBJECTS = $(FILES:%.c=$(OBJS_DIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	$(LIB) $(NAME) $(OBJECTS)
 
-%.o: %.c
+$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	$(CC) $(FLAGS) -c $< -o $@
+
+$(OBJS_DIR)
+	mkdir -p $(OBJS_DIR)
 
 clean:
 	@rm -f $(OBJECTS)
