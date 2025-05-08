@@ -11,6 +11,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 
 FILES = push_swap.c\
 		utils.c\
+		moves.c\
 
 OBJECTS = $(FILES:.c=.o)
 

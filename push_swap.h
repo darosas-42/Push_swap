@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:05:29 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/07 21:50:02 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:47:45 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ typedef struct s_stacks
 {
 	int	*a;
 	int	*b;
+	int	*good_a;
 	int	a_size;
 	int	b_size;
 	int	index;
-	int	*good_a;
+	int	tmp;
+	int	i;
 }	t_stacks;
 
 void	error_ps(t_stacks *stacks);
@@ -31,5 +33,9 @@ void	initialize_args(t_stacks *stacks);
 void	splitting_args(char *str, t_stacks *stacks);
 void	good_stack(t_stacks *stacks);
 void	perfect_ps(t_stacks *stacks);
+void	swap(char *msg, t_stacks *stacks);
+void	push(char *msg, t_stacks *stacks);
+void	rotate(char *msg, t_stacks *stacks);
+void	rev_rotate(char *msg, t_stacks *stacks);
 
 #endif
