@@ -31,7 +31,7 @@ $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
 	$(CC) $(FLAGS) -c $< -o $@
 
 $(OBJS_DIR):
-	mkdir -s $(OBJS_DIR)
+	mkdir -p $(OBJS_DIR)
 
 clean:
 	@rm -rf $(OBJS_DIR)
