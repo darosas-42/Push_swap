@@ -6,14 +6,16 @@ LIB = ar rcs
 
 FLAGS = -Wall -Werror -Wextra -g
 
-LIBFT_PATH = ./Libft
+LIBFT_PATH = Libft
 LIBFT = $(LIBFT_PATH)/libft.a
+
+OBJS_DIR = objs
 
 FILES = push_swap.c\
 		utils.c\
 		moves.c\
 
-OBJECTS = $(FILES:.c=.o)
+OBJECTS = $(FILES:%.c=$(OBJS_DIR)/%.o)
 
 all:libft $(NAME)
 
@@ -23,18 +25,23 @@ libft:
 	fi
 
 $(NAME): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LIBFT) -o push_swap
+	$(CC) $(OBJECTS) $(LIBFT) -o $(NAME)
 
-%.o: %.c
+$(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
 	$(CC) $(FLAGS) -c $< -o $@
 
+$(OBJS_DIR):
+	mkdir -s $(OBJS_DIR)
+
 clean:
-	rm -f $(OBJECTS) $(OBJ_BONUS)
+	@rm -rf $(OBJS_DIR)
 	@make clean -s -C $(LIBFT_PATH)
+	@echo "clean done!"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@make fclean -s -C $(LIBFT_PATH)
+	@echo "fclean done!"
 
 re: fclean all
 
