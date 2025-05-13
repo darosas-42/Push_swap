@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:47:57 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/07 18:28:42 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:14:26 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,26 @@ void	splitting_args(char *str, t_stacks *stacks)
 	free(matrix);
 }
 
+static void	indexing(t_stacks *stacks)
+{
+	stacks->i = -1;
+	while (stacks->good_a[++stacks->i])
+	{
+		stacks->index = -1;
+		while (stacks->a[++stacks->index])
+		{
+			if (stacks->good_a[stacks->i] == stacks->a[stacks->index])
+			{
+				stacks->good_a[stacks->i] = stacks->index;
+				break ;
+			}
+		}
+	}
+	stacks->i = -1;
+	while (stacks->good_a[++stacks->i])
+		stacks->a[stacks->i] = stacks->good_a[stacks->i];
+}
+
 void	good_stack(t_stacks *stacks)
 {
 	int	i;
@@ -86,4 +106,5 @@ void	good_stack(t_stacks *stacks)
 		}
 		i++;
 	}
+	indexing(stacks);
 }

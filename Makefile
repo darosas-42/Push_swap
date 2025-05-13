@@ -4,18 +4,20 @@ CC = cc
 
 LIB = ar rcs
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -g -I Libft/includes -I includes
 
 LIBFT_PATH = Libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
+PS_PATH = src
+
 OBJS_DIR = objs
 
-FILES = push_swap.c\
-		utils.c\
-		moves.c\
+PS_FILES = $(PS_PATH)/push_swap.c\
+		$(PS_PATH)/utils.c\
+		$(PS_PATH)/moves.c\
 
-OBJECTS = $(FILES:%.c=$(OBJS_DIR)/%.o)
+OBJECTS = $(PS_FILES:%.c=%.o)
 
 all:libft $(NAME)
 
@@ -27,11 +29,8 @@ libft:
 $(NAME): $(OBJECTS)
 	$(CC) $(OBJECTS) $(LIBFT) -o $(NAME)
 
-$(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
+%.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
-
-$(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
 
 clean:
 	@rm -rf $(OBJS_DIR)
