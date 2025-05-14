@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	swap(char *msg, t_stacks *stacks)
+void	swap(t_stacks *stacks, char *msg)
 {
 	if (msg[1] == 'a' || msg[1] == 's')
 	{
@@ -26,10 +26,10 @@ void	swap(char *msg, t_stacks *stacks)
 		stacks->b[0] = stacks->b[1];
 		stacks->b[1] = stacks->tmp;
 	}
-	ft_printf("s%c\n", msg[1]);
+	ft_printf("%s\n", msg);
 }
 
-void	push(char *msg, t_stacks *stacks)
+void	push(t_stacks *stacks, char *msg)
 {
 	if (msg[1] == 'b')
 	{
@@ -53,10 +53,10 @@ void	push(char *msg, t_stacks *stacks)
 		while (++stacks->i < stacks->b_size)
 			stacks->b[stacks->i] = stacks->b[stacks->i + 1];
 	}
-	ft_printf("p%c\n", msg[1]);
+	ft_printf("%s\n", msg);
 }
 
-void	rotate(char *msg, t_stacks *stacks)
+void	rotate(t_stacks *stacks, char *msg)
 {
 	stacks->i = -1;
 	if (msg[1] == 'a' || msg[1] == 'r')
@@ -74,10 +74,10 @@ void	rotate(char *msg, t_stacks *stacks)
 			stacks->b[stacks->i] = stacks->b[stacks->i + 1];
 		stacks->b[stacks->i] = stacks->tmp;
 	}
-	ft_printf("r%c\n", msg[1]);
+	ft_printf("%s\n", msg);
 }
 
-void	rev_rotate(char *msg, t_stacks *stacks)
+void	rev_rotate(t_stacks *stacks, char *msg)
 {
 	stacks->i = stacks->a_size;
 	if (msg[2] == 'a' || msg[2] == 'r')
@@ -95,5 +95,5 @@ void	rev_rotate(char *msg, t_stacks *stacks)
 			stacks->b[stacks->i] = stacks->b[stacks->i - 1];
 		stacks->b[0] = stacks->tmp;
 	}
-	ft_printf("rr%c\n", msg[2]);
+	ft_printf("%s\n", msg);
 }

@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	error_ps(t_stacks *stacks)
+void	free_exit(t_stacks *stacks, char *msg)
 {
 	if (stacks)
 	{
@@ -24,8 +24,12 @@ void	error_ps(t_stacks *stacks)
 			free(stacks->good_a);
 		free(stacks);
 	}
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
+	if (msg[0] == 'E')
+	{
+		write(2, "Error\n", 6);
+		exit(EXIT_FAILURE);
+	}
+	exit(EXIT_SUCCESS);
 }
 
 static int	valid_args(char **argv, t_stacks *stacks)
@@ -43,14 +47,14 @@ static int	valid_args(char **argv, t_stacks *stacks)
 			if (argv[i][j] != ' ' && argv[i][j] != '+' && argv[i][j] != '-')
 			{
 				if (!(ft_isdigit(argv[i][j])))
-					error_ps(stacks);
+					free_exit(stacks, "Error");
 			}
 			if ((argv[i][j] == ' ' || argv[i][j] == '+' || argv[i][j] == '-')
 			&& (ft_isdigit(argv[i][j + 1])))
 				stacks->a_size++;
 			if ((argv[i][j] == '+' || argv[i][j] == '-')
 			&& !(ft_isdigit(argv[i][j + 1])))
-				error_ps(stacks);
+				free_exit(stacks, "Error");
 		}
 		stacks->a_size++;
 	}
@@ -89,12 +93,25 @@ int	main(int argc, char **argv)
 	t_stacks	*stacks;
 	
 	if (argc < 2)
-		error_ps(NULL);
+		free_exit(NULL, "Error");
 	stacks = malloc(sizeof(t_stacks));
 	if (!stacks)
-		error_ps(NULL);
+		free_exit(NULL, "Error");
 	valid_args(argv, stacks);
 	initialize_args(stacks);
 	getting_args(argv, stacks);
+	if (is_sorted(stacks) == 1 || stacks->a_size == 1)
+		free_exit(stacks, "");
+	if (stacks->a_size == 2)
+		swap(stacks, "sa");
+	else if (stacks->a_size == 3)
+		sort_three(stacks);
+	else if (stacks->a_size == 4 || stacks->a_size == 5)
+		sort_four_to_five(stacks);
+	else
+		raddix_sort(stacks);
+	if (!(is_sorted(stacks)))
+		free_exit(stacks, "Error");
+	free_exit(stacks, "");
 	return (0);
 }

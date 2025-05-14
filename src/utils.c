@@ -16,32 +16,28 @@ void	initialize_args(t_stacks *stacks)
 {
 	stacks->a = malloc(stacks->a_size * sizeof(int));
 	if (!stacks->a)
-		error_ps(stacks);
+		free_exit(stacks, "Error");
 	stacks->b = malloc(stacks->a_size * sizeof(int));
 	if (!stacks->b)
-		error_ps(stacks);
+		free_exit(stacks, "Error");
 	stacks->good_a = malloc(stacks->a_size * sizeof(int));
 	if (!stacks->good_a)
-		error_ps(stacks);
+		free_exit(stacks, "Error");
 	stacks->index = 0;
 	stacks->b_size = 0;
 }
 
-/*void	perfect_ps(t_stacks *stacks)
+int	is_sorted(t_stacks *stacks)
 {
-	if (stacks)
+	stacks->i = 0;
+	while (stacks->i < (stacks->a_size - 1))
 	{
-		if (stacks->a)
-			free(stacks->a);
-		if (stacks->b)
-			free(stacks->b);
-		if (stacks->good_a)
-			free(stacks->good_a);
-		free(stacks);
+		if (stacks->a[i] > stacks->a[i + 1])
+			return (0);
+		i++;
 	}
-	write(2, "Perfect\n", 6);
-	exit(EXIT_SUCCESS);
-} */
+	return (1);
+}
 
 void	splitting_args(char *str, t_stacks *stacks)
 {
@@ -51,7 +47,7 @@ void	splitting_args(char *str, t_stacks *stacks)
 
 	matrix = ft_split(str, ' ');
 	if (!matrix)
-		error_ps(stacks);
+		free_exit(stacks, "Error");
 	x = 0;
 	while (matrix[x])
 		stacks->a[stacks->index++] = ft_atoi(matrix[x++]);
@@ -94,7 +90,7 @@ void	good_stack(t_stacks *stacks)
 		while (stacks->good_a[j])
 		{
 			if (stacks->good_a[i] == stacks->good_a[j])
-				error_ps(stacks);
+				free_exit(stacks, "Error");
 			if (stacks->good_a[i] > stacks->good_a[j])
 			{
 				swap = stacks->good_a[i];
