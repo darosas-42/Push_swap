@@ -54,12 +54,17 @@ void	raddix_sort_stack_b(t_stack *stacks, int bits)
 	int	i;
 
 	i = stacks->b_size;
-	while (i-- && (stacks->index + 1) < bits) // is sorted?
+	while (i-- && (stacks->index + 1) < bits && !is_sorted(stacks))
 	{
 		if (((stacks->b[0] >> stacks->index + 1) & 1) == 1)
 			push(stacks, "pa");
 		else
 			rotate(stacks, "rb");
+	}
+	if (is_sorted(stacks)
+	{
+		while (stacks->b_size > 0)
+			push(stacks, "pa");
 	}
 }
 
@@ -78,13 +83,12 @@ void	raddix_sort(t_stack *stacks)
 	while (++stacks->index < bits)
 	{
 		stacks->i = stacks->a_size;
-		while (stacks->i > 0) // is sorted?
+		while (stacks->i-- && !is_sorted(stacks)
 		{
 			if (((stacks->a[0] >> staks->index) & 1) == 0)
 				push(stacks, "pb");
 			else
 				rotate(stacks, "ra");
-			stacks->i--;
 		}
 		raddix_sort_stack_b(stacks, bits);
 	}
