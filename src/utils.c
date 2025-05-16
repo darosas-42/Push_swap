@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:47:57 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/13 20:14:26 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/16 21:34:28 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,33 @@ void	initialize_args(t_stacks *stacks)
 	stacks->b_size = 0;
 }
 
-int	is_sorted(t_stacks *stacks)
+int	ft_atoi_ps(const char *s, t_stacks *stacks)
 {
-	stacks->i = 0;
-	while (stacks->i < (stacks->a_size - 1))
+	int			i;
+	long int	nb;
+	int			neg;
+
+	i = 0;
+	nb = 0;
+	neg = 1;
+	while (s[i] == ' ' || s[i] == '\f' || s[i] == '\n' || s[i] == '\r'
+		|| s[i] == '\t' || s[i] == '\v')
+		i++;
+	if (s[i] == '-' || s[i] == '+')
 	{
-		if (stacks->a[i] > stacks->a[i + 1])
-			return (0);
+		if (s[i] == '-')
+			neg = -1;
 		i++;
 	}
-	return (1);
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		nb = (nb * 10) + (s[i] - 48);
+		i++;
+	}
+	nb *= neg;
+	if (nb > INT_MAX || nb < INT_MIN)
+		free_exit(stacks, "Error");
+	return (nb);
 }
 
 void	splitting_args(char *str, t_stacks *stacks)
@@ -60,10 +77,10 @@ void	splitting_args(char *str, t_stacks *stacks)
 static void	indexing(t_stacks *stacks)
 {
 	stacks->i = -1;
-	while (stacks->good_a[++stacks->i])
+	while (++stacks->i < stacks->a_size)
 	{
 		stacks->index = -1;
-		while (stacks->a[++stacks->index])
+		while (++stacks->index < stacks->a_size)
 		{
 			if (stacks->good_a[stacks->i] == stacks->a[stacks->index])
 			{
@@ -73,7 +90,7 @@ static void	indexing(t_stacks *stacks)
 		}
 	}
 	stacks->i = -1;
-	while (stacks->good_a[++stacks->i])
+	while (++stacks->i < stacks->a_size)
 		stacks->a[stacks->i] = stacks->good_a[stacks->i];
 }
 
@@ -84,10 +101,10 @@ void	good_stack(t_stacks *stacks)
 	int	swap;
 
 	i = 0;
-	while (stacks->good_a[i + 1])
+	while ((i + 1) < stacks->a_size)
 	{
 		j = i + 1;
-		while (stacks->good_a[j])
+		while (j < stacks->a_size)
 		{
 			if (stacks->good_a[i] == stacks->good_a[j])
 				free_exit(stacks, "Error");

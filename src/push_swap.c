@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:05:33 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/05 19:35:33 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/16 21:45:01 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ void	free_exit(t_stacks *stacks, char *msg)
 	}
 	exit(EXIT_SUCCESS);
 }
+static void	valid_args2(char **argv, t_stacks *stacks, int i, int j)
+{
+	if (argv[i][j] != ' ' && argv[i][j] != '+' && argv[i][j] != '-')
+	{
+		if (!(ft_isdigit(argv[i][j])))
+			free_exit(stacks, "Error");
+	}
+	if ((argv[i][j] == ' ' || argv[i][j] == '+' || argv[i][j] == '-')
+	&& (ft_isdigit(argv[i][j + 1])))
+		stacks->a_size++;
+	if ((argv[i][j] == '+' || argv[i][j] == '-')
+	&& !(ft_isdigit(argv[i][j + 1])))
+		free_exit(stacks, "Error");
+	if ((argv[i][j] == '+' || argv[i][j] == '-')
+	&& ft_isdigit(argv[i][j + 1]) && ft_isdigit(argv[i][j - 1]))
+		free_exit(stacks, "Error");
+}
 
 static int	valid_args(char **argv, t_stacks *stacks)
 {
@@ -42,20 +59,10 @@ static int	valid_args(char **argv, t_stacks *stacks)
 	while (argv[++i])
 	{
 		j = -1;
+		if (argv[i][0] == '\0')
+			free_exit(stacks, "Error");
 		while (argv[i][++j])
-		{
-			if (argv[i][j] != ' ' && argv[i][j] != '+' && argv[i][j] != '-')
-			{
-				if (!(ft_isdigit(argv[i][j])))
-					free_exit(stacks, "Error");
-			}
-			if ((argv[i][j] == ' ' || argv[i][j] == '+' || argv[i][j] == '-')
-			&& (ft_isdigit(argv[i][j + 1])))
-				stacks->a_size++;
-			if ((argv[i][j] == '+' || argv[i][j] == '-')
-			&& !(ft_isdigit(argv[i][j + 1])))
-				free_exit(stacks, "Error");
-		}
+			valid_args2(argv, stacks, i ,j);
 		stacks->a_size++;
 	}
 	return (1);
@@ -80,10 +87,10 @@ static void	getting_args(char **argv, t_stacks *stacks)
 		}
 		if (argv[i][j] == ' ')
 			continue ;
-		stacks->a[stacks->index++] = ft_atoi(argv[i]);
+		stacks->a[stacks->index++] = ft_atoi_ps(argv[i], stacks);
 	}
 	i = -1;
-	while (stacks->a[++i])
+	while (++i < stacks->a_size)
 		stacks->good_a[i] = stacks->a[i];
 	good_stack(stacks);
 }
@@ -109,7 +116,7 @@ int	main(int argc, char **argv)
 	else if (stacks->a_size == 4 || stacks->a_size == 5)
 		sort_four_to_five(stacks);
 	else
-		raddix_sort(stacks);
+		radix_sort(stacks);
 	if (!(is_sorted(stacks)))
 		free_exit(stacks, "Error");
 	free_exit(stacks, "");

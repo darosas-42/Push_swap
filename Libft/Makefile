@@ -83,7 +83,7 @@ $(NAME): $(LIBFT_OBJS) $(LIBFT_OBJS_BONUS) $(GNL_OBJS) $(PRINTF_OBJS)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(LIBFT_OBJS) $(LIBS_OBJS_BONUS) $(GNL_OBJS) $(PRINTF_OBJS)
+	@rm -f $(LIBFT_OBJS) $(LIBFT_OBJS_BONUS) $(GNL_OBJS) $(PRINTF_OBJS)
 	@echo "libft clean done!"
 
 fclean: clean
