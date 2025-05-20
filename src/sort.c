@@ -6,12 +6,11 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 18:28:48 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/16 21:25:01 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:36:23 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 int	is_sorted(t_stacks *stacks)
 {
@@ -49,7 +48,7 @@ void	sort_four_to_five(t_stacks *stacks)
 		else
 			rotate(stacks, "ra");
 	}
-	if (stacks->a[2] != 4)
+	if (stacks->a[2] != 4 && stacks->a_size == 3)
 	{
 		if (stacks->a[0] == 4)
 			rotate(stacks, "ra");

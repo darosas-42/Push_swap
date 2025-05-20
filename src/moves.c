@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 19:28:35 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/16 19:29:32 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:05:07 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	swap(t_stacks *stacks, char *msg)
 	}
 	if (msg[1] == 'b' || msg[1] == 's')
 	{
-		stacks->tmp = stacks->a[0];
+		stacks->tmp = stacks->b[0];
 		stacks->b[0] = stacks->b[1];
 		stacks->b[1] = stacks->tmp;
 	}

@@ -4,7 +4,7 @@ CC = cc
 
 LIB = ar rcs
 
-FLAGS = -Wall -Werror -Wextra -g -I Libft/includes -I includes
+FLAGS = -Wall -Werror -Wextra -I Libft/includes -I includes
 
 LIBFT_PATH = Libft
 LIBFT = $(LIBFT_PATH)/libft.a

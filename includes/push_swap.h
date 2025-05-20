@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:05:29 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/16 21:36:04 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:42:19 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ void	sort_three(t_stacks *stacks);
 void	sort_four_to_five(t_stacks *stacks);
 void	radix_sort(t_stacks *stacks);
 int		ft_atoi_ps(const char *s, t_stacks *stacks);
+
+void	testing_nb(t_stacks *stacks, char *msg);
 
 #endif

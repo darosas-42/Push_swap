@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:47:57 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/16 21:34:28 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:50:51 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,13 @@ static void	indexing(t_stacks *stacks)
 		stacks->index = -1;
 		while (++stacks->index < stacks->a_size)
 		{
-			if (stacks->good_a[stacks->i] == stacks->a[stacks->index])
+			if (stacks->good_a[stacks->index] == stacks->a[stacks->i])
 			{
-				stacks->good_a[stacks->i] = stacks->index;
+				stacks->a[stacks->i] = stacks->index;
 				break ;
 			}
 		}
 	}
-	stacks->i = -1;
-	while (++stacks->i < stacks->a_size)
-		stacks->a[stacks->i] = stacks->good_a[stacks->i];
 }
 
 void	good_stack(t_stacks *stacks)
@@ -113,7 +110,6 @@ void	good_stack(t_stacks *stacks)
 				swap = stacks->good_a[i];
 				stacks->good_a[i] = stacks->good_a[j];
 				stacks->good_a[j] = swap;
-				i = 0;
 			}
 			j++;
 		}

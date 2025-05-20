@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 19:05:33 by darosas-          #+#    #+#             */
-/*   Updated: 2025/05/16 21:45:01 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:25:20 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	free_exit(t_stacks *stacks, char *msg)
 	}
 	exit(EXIT_SUCCESS);
 }
+
 static void	valid_args2(char **argv, t_stacks *stacks, int i, int j)
 {
 	if (argv[i][j] != ' ' && argv[i][j] != '+' && argv[i][j] != '-')
@@ -38,8 +39,8 @@ static void	valid_args2(char **argv, t_stacks *stacks, int i, int j)
 		if (!(ft_isdigit(argv[i][j])))
 			free_exit(stacks, "Error");
 	}
-	if ((argv[i][j] == ' ' || argv[i][j] == '+' || argv[i][j] == '-')
-	&& (ft_isdigit(argv[i][j + 1])))
+	if (((argv[i][j] == ' ' || argv[i][j] == '+' || argv[i][j] == '-')
+	&& ft_isdigit(argv[i][j + 1])) || (j == 0 && ft_isdigit(argv[i][j])))
 		stacks->a_size++;
 	if ((argv[i][j] == '+' || argv[i][j] == '-')
 	&& !(ft_isdigit(argv[i][j + 1])))
@@ -53,7 +54,7 @@ static int	valid_args(char **argv, t_stacks *stacks)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	stacks->a_size = 0;
 	while (argv[++i])
@@ -62,8 +63,7 @@ static int	valid_args(char **argv, t_stacks *stacks)
 		if (argv[i][0] == '\0')
 			free_exit(stacks, "Error");
 		while (argv[i][++j])
-			valid_args2(argv, stacks, i ,j);
-		stacks->a_size++;
+			valid_args2(argv, stacks, i, j);
 	}
 	return (1);
 }
@@ -98,8 +98,8 @@ static void	getting_args(char **argv, t_stacks *stacks)
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
-	
-	if (argc < 2)
+
+	if (argc < 1)
 		free_exit(NULL, "Error");
 	stacks = malloc(sizeof(t_stacks));
 	if (!stacks)
